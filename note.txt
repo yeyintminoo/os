@@ -1,0 +1,14 @@
+Item Manage
+--------------------------------------------
+-create resource
+-create controller(--resource)
+-show route list(route:list)
+-create 4 blades (4 for GET methods)
+-call specification view from method
+-use store method(form action)
+  -dd()
+  -validation()
+  -if include image, upload
+  -data insert
+  -redirect->(index)
+ -show in database

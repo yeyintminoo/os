@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // return view('welcome');
-    return 'Hello Laravel';
-});
+Route::get('/', 'BackendController@dashboard')->name('dashboard');
+                 // uri
+Route::resource('items','ItemController');
+// rpute 7ခု ရ(get route - 4 ခု/post-1 ခု/put-1 ခု/delete-1 ခု ရ)
+Route::resource('brands','BrandController');
