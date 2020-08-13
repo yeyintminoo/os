@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Brand;
-
-class BrandController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,6 @@ class BrandController extends Controller
     public function index()
     {
         //
-        return view('backend.brands.index');
     }
 
     /**
@@ -27,7 +24,6 @@ class BrandController extends Controller
     public function create()
     {
         //
-        return view('backend.brands.create');
     }
 
     /**
@@ -39,28 +35,6 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         //
-        
-        // dd($request);
-        $request->validate([
-           
-           'name'=> 'required',
-           'photo'=>'required',
-           
-
-        ]);
-        // file upload
-        $imageName = time().'.'.$request->photo->extension();
-        $request->photo->move(public_path('backend/brandimg'),$imageName);
-        $myfile = 'backend/brandimg/'.$imageName;
-
-        // data insert
-        $brand = new Brand;
-        
-        $brand->name=$request->name;
-        $brand->photo=$request->photo;
-        
-        // http_redirect()
-        return redirect()->route('brands.index');
     }
 
     /**
@@ -72,7 +46,6 @@ class BrandController extends Controller
     public function show($id)
     {
         //
-        return view('backend.brands.show');
     }
 
     /**
@@ -84,7 +57,6 @@ class BrandController extends Controller
     public function edit($id)
     {
         //
-        return view('backend.brands.edit');
     }
 
     /**
@@ -97,23 +69,6 @@ class BrandController extends Controller
     public function update(Request $request, $id)
     {
         //
-
-         $request->validate([
-           'codeno'=>'required|min:4',
-           'name'=> 'required',
-           'photo'=>'sometimes',
-
-           if ($request->hasFile('photo')){
-            $imageName = time().'.'.$request->photo->extension();
-            $request->photo->move(public_path('backend/brandimg'),$imageName);
-            $myfile = 'backend/brandimg/'.$imageName;
-
-             $item = Item::find($id);
-             $item->name=$request->name;
-             $item->photo=$myfile;
-             $item->save();
-
-             return redirect()->route('items.index');
     }
 
     /**

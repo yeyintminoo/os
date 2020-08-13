@@ -12,3 +12,4 @@ Item Manage
   -data insert
   -redirect->(index)
  -show in database
+
