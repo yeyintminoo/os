@@ -22,3 +22,16 @@ Item Manage
  -profile page
  -regiter page
  -login page
+
+
+Deployment Laravel Project
+
+-create Subdomain
+-enter into subdomain using SSH\
+ ssh -p 7822 username@domain.me
+-git clone
+-enter into folder(cd)
+-cp .env.example .env
+-composer install
+-php artisan key:generate
+-
