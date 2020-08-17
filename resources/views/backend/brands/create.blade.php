@@ -3,16 +3,20 @@
 @section('content')
 
 <!-- Begin Page Content -->
- <div class="container-fluid mb-3">
-
+<div class="container-fluid mb-3">
  	<!-- Page Heading -->
- 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
- 		<h1 class="h3 mb-0 text-gray-800">Brand Create</h1>
- 		<a href="{{route('brands.create')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-arrow-left fa-sm text-white-50"></i> Go Back </a>
- 	</div>
-
  	<div class="row">
  		<div class="offset-md-2 col-md-8">
+
+ 			@if ($errors->any())
+ 			<div class="alert alert-danger">
+ 				<ul>
+ 					@foreach($errors->all() as $error)
+ 					<li>{{$error}}</li>
+ 					@endforeach
+ 				</ul>
+ 			</div>
+ 			@endif
  			<form method="POST" action="{{route('brands.store')}}" enctype="multipart/form-data">
  				@csrf
  				<div class="form-group">
@@ -27,6 +31,6 @@
  			</form>
  		</div>
  	</div>
+</div>
 
- </div>
  @endsection

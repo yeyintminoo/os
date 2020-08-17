@@ -17,38 +17,39 @@
  		</div>
  		<div class="card-body">
  			<div class="table-responsive">
- 				<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
- 					<thead>
- 						<tr>
- 							<th>Name</th>
- 							<th>Photo</th>
- 							<th>Actions</th>
- 						</tr>
- 					</thead>
- 					<tfoot>
- 						<tr>
- 							<th>Name</th>
- 							<th>Photo</th>
- 							<th>Actions</th>
- 						</tr>
- 					</tfoot>
- 					<tbody>
- 						<?php 
+ 				<table class="table table-bordered">
+  		<thead>
+  			<tr>
+  				<th>No</th>
+  				<th>Name</th>
+  				<th>Photo</th>
+  				<th>Actions</th>
+  			</tr>
+  		</thead>
+  		<tbody>
+        @php $i=1; @endphp
+        @foreach($brands as $brand)
+  			<tr>
+  				<th>{{$i++}}</th>
+  				<th>{{$brand->name}}</th>
+  				<th>
+            <img src="{{$brand->photo}}" class="img-fluid">    
+          </th>
+  				<th>
+  					<a href="{{route('brands.edit',$brand->id)}}" class="btn btn-primary">Edit</a>
 
- 						
+            <form method="post" action="{{route('brands.destroy',$brand->id)}}" onsubmit="return confirm('Are you sure?')" class="d-inline-block">
+              @csrf
+              @method('DELETE')
+              <input type="submit" name="btnsubmit" value="Delete" class="btn btn-danger">
+            </form>
 
- 						<tr>
- 							<td><?= $name ?></td>
- 							<td><img src="<?= $photo ?>" width=50 height =50></td>
- 							<td>
- 								<button class="btn btn-outline-primary detail btn-sm"><i class="fas fa-info"></i></button>
- 								<button class="btn btn-outline-warning edit btn-sm"><i class="far fa-edit"></i></button>
- 								<button class="btn btn-outline-danger delete btn-sm"><i class="fas fa-trash-alt"></i></button>
- 							</td>
- 						</tr>
-
- 					</tbody>
- 				</table>
+  					{{-- <a href="#" class="btn btn-warning">Delete</a> --}}
+  				</th>
+  			</tr>
+        @endforeach
+  		</tbody>
+  	</table>
  			</div>
  		</div>
  	</div>

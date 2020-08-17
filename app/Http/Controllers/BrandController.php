@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Brand;
+use App\Item;
+
 
 class BrandController extends Controller
 {
@@ -16,7 +18,9 @@ class BrandController extends Controller
     public function index()
     {
         //
-        return view('backend.brands.index');
+        $brands= Brand::all();
+
+        return view('backend.brands.index',compact('brands'));
     }
 
     /**
@@ -27,7 +31,9 @@ class BrandController extends Controller
     public function create()
     {
         //
-        return view('backend.brands.create');
+        $brands= Brand::all();
+        
+        return view('backend.brands.create',compact('brands'));
     }
 
     /**
@@ -45,7 +51,7 @@ class BrandController extends Controller
            
            'name'=> 'required',
            'photo'=>'required',
-           
+
 
         ]);
         // file upload
@@ -55,10 +61,9 @@ class BrandController extends Controller
 
         // data insert
         $brand = new Brand;
-        
         $brand->name=$request->name;
-        $brand->photo=$request->photo;
-        
+        $brand->photo=$myfile;
+        $brand->save();
         // http_redirect()
         return redirect()->route('brands.index');
     }
@@ -72,7 +77,9 @@ class BrandController extends Controller
     public function show($id)
     {
         //
-        return view('backend.brands.show');
+        $brand= Brand::find($id);
+        // dd($brand);
+        return view('backend.brands.show',compact('brand'));
     }
 
     /**
@@ -84,7 +91,8 @@ class BrandController extends Controller
     public function edit($id)
     {
         //
-        return view('backend.brands.edit');
+        $brand = Brand::find($id);
+        return view('backend.brands.edit',compact('brand'));
     }
 
     /**
@@ -98,22 +106,35 @@ class BrandController extends Controller
     {
         //
 
-         $request->validate([
-           'codeno'=>'required|min:4',
+         // dd($request);
+
+        // validation
+          $request->validate([
+           
            'name'=> 'required',
            'photo'=>'sometimes',
+           
 
+        ]);
+
+        // if include file,let's upload
            if ($request->hasFile('photo')){
             $imageName = time().'.'.$request->photo->extension();
             $request->photo->move(public_path('backend/brandimg'),$imageName);
             $myfile = 'backend/brandimg/'.$imageName;
-
-             $item = Item::find($id);
-             $item->name=$request->name;
-             $item->photo=$myfile;
-             $item->save();
-
-             return redirect()->route('items.index');
+        // delete old photo(unlink())
+        }else{
+            $myfile = $request->oldphoto;
+        }
+        // data update
+        $brand = Brand::find($id);
+        
+        $brand->name=$request->name;
+        $brand->photo=$myfile;
+        $brand->save();
+           
+        // redirect
+        return redirect()->route('brands.index');
     }
 
     /**
@@ -124,6 +145,10 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        //
+       //destroy
+        $brand= Brand::find($id);
+        $brand->delete();
+        // redirect
+        return redirect()->route('brands.index');
     }
 }

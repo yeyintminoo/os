@@ -13,3 +13,12 @@ Item Manage
   -redirect->(index)
  -show in database
 
+
+ 13-8-2020
+ -------------
+ - filter item page
+ - item detail page
+ -chcekout
+ -profile page
+ -regiter page
+ -login page

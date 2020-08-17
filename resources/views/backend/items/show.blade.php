@@ -27,9 +27,20 @@
   					</th>
   				</tr>
   				<tr>
-  					<th>
-  						<td>Product Description :{{$item->description}} </td>
-  					</th>
+  				<tr>
+            <th>
+              <td>Product Description :{{$item->description}} </td>
+            </th>    
+          </tr>
+          <tr>
+             <th>
+                <td>Brand : {{$item->brand->name}}</td>
+            </th>
+          </tr>
+          <tr>
+            <th>
+                <td>Subcategory : {{$item->subcategory->name}}</td>
+            </th>
   				</tr>
   			</table>
   		</div>
