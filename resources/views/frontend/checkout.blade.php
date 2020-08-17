@@ -24,7 +24,7 @@
 	<textarea class="notes" placeholder="Your note.."></textarea>
 @role('customer')
 	
-	<a href="#" class="btn btn-primary float-right">Check Out</a>
+	<a class="btn btn-primary float-right buy_now">Check Out</a>
 @else
 	<a href="{{route('login')}}" class="btn btn-info float-right">Login to Check Out</a>
 @endrole
